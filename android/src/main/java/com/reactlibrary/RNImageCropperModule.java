@@ -1,5 +1,3 @@
-package versioned.host.exp.exponent.modules.api;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +13,7 @@ import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableMap;
 import com.theartofdev.edmodo.cropper.CropImage;
 
-import host.exp.exponent.ActivityResultListener;
+// import host.exp.exponent.ActivityResultListener;
 // import host.exp.expoview.Exponent;
 
 public class ImageCropperModule extends ReactContextBaseJavaModule implements ActivityResultListener {

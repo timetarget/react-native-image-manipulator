@@ -17,7 +17,7 @@
 
 @implementation RNImageManipulator
 
-RCT_EXPORT_MODULE(ExponentImageManipulator);
+RCT_EXPORT_MODULE(RNImageManipulator);
 
 @synthesize bridge = _bridge;
 

@@ -1,10 +1,19 @@
 #import "RNImageManipulator.h"
-#import "EXFileSystem.h"
-#import "EXImageUtils.h"
+// #import "EXFileSystem.h"
+// #import "EXImageUtils.h"
 #import <React/RCTLog.h>
 // #import <Photos/Photos.h>
 // #import "EXModuleRegistryBinding.h"
 // #import <EXFileSystemInterface/EXFileSystemInterface.h>
+
+// + (UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect
+// {
+//   CGImageRef takenCGImage = image.CGImage;
+//   CGImageRef cropCGImage = CGImageCreateWithImageInRect(takenCGImage, rect);
+//   image = [UIImage imageWithCGImage:cropCGImage scale:image.scale orientation:image.imageOrientation];
+//   CGImageRelease(cropCGImage);
+//   return image;
+// }
 
 @implementation RNImageManipulator
 
@@ -35,10 +44,10 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
     reject(@"E_MISSING_MODULE", @"No FileSystem module.", nil);
     return;
   }
-  if (!([fileSystem permissionsForURI:url] & EXFileSystemPermissionRead)) {
-    reject(@"E_FILESYSTEM_PERMISSIONS", [NSString stringWithFormat:@"File '%@' isn't readable.", uri], nil);
-    return;
-  }
+  // if (!([fileSystem permissionsForURI:url] & EXFileSystemPermissionRead)) {
+  //   reject(@"E_FILESYSTEM_PERMISSIONS", [NSString stringWithFormat:@"File '%@' isn't readable.", uri], nil);
+  //   return;
+  // }
 
   if ([[url scheme] isEqualToString:@"assets-library"]) {
     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsWithALAssetURLs:@[url] options:nil];
@@ -161,7 +170,7 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
         return;
       }
       CGRect cropDimensions = CGRectMake(originX, originY, requestedWidth, requestedHeight);
-      image = [EXImageUtils cropImage:image toRect:cropDimensions];
+      // image = [EXImageUtils cropImage:image toRect:cropDimensions];
     }
   }
 

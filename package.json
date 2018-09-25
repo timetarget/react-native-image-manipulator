@@ -1,8 +1,7 @@
-
 {
   "name": "react-native-image-manipulator",
   "version": "1.0.0",
-  "description": "",
+  "description": "An API to modify images stored in app scope.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +9,7 @@
   "keywords": [
     "react-native"
   ],
-  "author": "",
+  "author": "Pontus Abrahamsson",
   "license": "",
   "peerDependencies": {
     "react-native": "^0.41.2"

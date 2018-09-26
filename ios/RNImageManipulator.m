@@ -40,10 +40,10 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
   NSURL *url = [NSURL URLWithString:uri];
   NSString *path = [url.path stringByStandardizingPath];
   // id<EXFileSystemInterface> fileSystem = [self.bridge.scopedModules.moduleRegistry getModuleImplementingProtocol:@protocol(EXFileSystemInterface)];
-  if (!fileSystem) {
-    reject(@"E_MISSING_MODULE", @"No FileSystem module.", nil);
-    return;
-  }
+  // if (!fileSystem) {
+  //   reject(@"E_MISSING_MODULE", @"No FileSystem module.", nil);
+  //   return;
+  // }
   // if (!([fileSystem permissionsForURI:url] & EXFileSystemPermissionRead)) {
   //   reject(@"E_FILESYSTEM_PERMISSIONS", [NSString stringWithFormat:@"File '%@' isn't readable.", uri], nil);
   //   return;
@@ -198,8 +198,8 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
   }
 
   // id<EXFileSystemInterface> fileSystem = [self.bridge.scopedModules.moduleRegistry getModuleImplementingProtocol:@protocol(EXFileSystemInterface)];
-  NSString *directory = [fileSystem.cachesDirectory stringByAppendingPathComponent:@"ImageManipulator"];
-  [fileSystem ensureDirExistsWithPath:directory];
+  NSString *directory = "" //[fileSystem.cachesDirectory stringByAppendingPathComponent:@"ImageManipulator"];
+  // [fileSystem ensureDirExistsWithPath:directory];
   NSString *fileName = [[[NSUUID UUID] UUIDString] stringByAppendingString:extension];
   NSString *newPath = [directory stringByAppendingPathComponent:fileName];
   [imageData writeToFile:newPath atomically:YES];

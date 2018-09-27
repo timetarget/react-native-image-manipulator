@@ -1,11 +1,6 @@
 #import "RNImageManipulator.h"
-#import "ImageUtils.h"
 #import <React/RCTLog.h>
 #import <Photos/Photos.h>
-// #import "EXFileSystem.h"
-// #import "EXModuleRegistryBinding.h"
-// #import <EXFileSystemInterface/EXFileSystemInterface.h>
-
 
 @implementation RNImageManipulator
 
@@ -162,7 +157,7 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
         return;
       }
       CGRect cropDimensions = CGRectMake(originX, originY, requestedWidth, requestedHeight);
-      image = [ImageUtils cropImage:image toRect:cropDimensions];
+      image = @""; //[ImageUtils cropImage:image toRect:cropDimensions];
     }
   }
 
@@ -189,8 +184,7 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
     extension = @".jpg";
   }
 
-  // id<EXFileSystemInterface> fileSystem = [self.bridge.scopedModules.moduleRegistry getModuleImplementingProtocol:@protocol(EXFileSystemInterface)];
-  NSString *directory = "" //[fileSystem.cachesDirectory stringByAppendingPathComponent:@"ImageManipulator"];
+  NSString *directory = [@"cache" stringByAppendingPathComponent:@"ImageManipulator"];
   // [fileSystem ensureDirExistsWithPath:directory];
   NSString *fileName = [[[NSUUID UUID] UUIDString] stringByAppendingString:extension];
   NSString *newPath = [directory stringByAppendingPathComponent:fileName];
@@ -202,9 +196,8 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
   response[@"width"] = @(CGImageGetWidth(image.CGImage));
   response[@"height"] = @(CGImageGetHeight(image.CGImage));
   if (saveOptions[@"base64"] && [saveOptions[@"base64"] boolValue]) {
-    response[@"base64"] = [imageData base64EncodedStringWithOptions:0];
+   response[@"base64"] = [imageData base64EncodedStringWithOptions:0];
   }
+
   resolve(response);
 }
-
-@end

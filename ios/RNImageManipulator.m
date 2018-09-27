@@ -1,19 +1,11 @@
 #import "RNImageManipulator.h"
-// #import "EXFileSystem.h"
-// #import "EXImageUtils.h"
+#import "ImageUtils.h"
 #import <React/RCTLog.h>
-// #import <Photos/Photos.h>
+#import <Photos/Photos.h>
+// #import "EXFileSystem.h"
 // #import "EXModuleRegistryBinding.h"
 // #import <EXFileSystemInterface/EXFileSystemInterface.h>
 
-// + (UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect
-// {
-//   CGImageRef takenCGImage = image.CGImage;
-//   CGImageRef cropCGImage = CGImageCreateWithImageInRect(takenCGImage, rect);
-//   image = [UIImage imageWithCGImage:cropCGImage scale:image.scale orientation:image.imageOrientation];
-//   CGImageRelease(cropCGImage);
-//   return image;
-// }
 
 @implementation RNImageManipulator
 
@@ -170,7 +162,7 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
         return;
       }
       CGRect cropDimensions = CGRectMake(originX, originY, requestedWidth, requestedHeight);
-      // image = [EXImageUtils cropImage:image toRect:cropDimensions];
+      image = [ImageUtils cropImage:image toRect:cropDimensions];
     }
   }
 

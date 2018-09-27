@@ -184,20 +184,41 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
     extension = @".jpg";
   }
 
-  NSString *directory = [@"cache" stringByAppendingPathComponent:@"ImageManipulator"];
-  // [fileSystem ensureDirExistsWithPath:directory];
-  NSString *fileName = [[[NSUUID UUID] UUIDString] stringByAppendingString:extension];
-  NSString *newPath = [directory stringByAppendingPathComponent:fileName];
-  [imageData writeToFile:newPath atomically:YES];
-  NSURL *fileURL = [NSURL fileURLWithPath:newPath];
-  NSString *filePath = [fileURL absoluteString];
+
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+  NSString *directory = directory = [paths firstObject];
+
+  NSString* name = [[NSUUID UUID] UUIDString];
+  NSString* fullName = [NSString stringWithFormat:@"%@.%@", name, extension];
+  NSString* fullPath = [directory stringByAppendingPathComponent:fullName];
+
+  [imageData writeToFile:fullPath atomically:YES];
+  NSURL *fileURL = [NSURL fileURLWithPath:fullPath];
+  NSString *filePath = [fileURL path];
   NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-  response[@"uri"] = filePath;
+   NSURL *fileUrl = [[NSURL alloc] initFileURLWithPath:fullPath];
+   response[@"path"] = fullPath;
+  response[@"uri"] = fileUrl.absoluteString;
   response[@"width"] = @(CGImageGetWidth(image.CGImage));
   response[@"height"] = @(CGImageGetHeight(image.CGImage));
   if (saveOptions[@"base64"] && [saveOptions[@"base64"] boolValue]) {
    response[@"base64"] = [imageData base64EncodedStringWithOptions:0];
   }
+
+  // NSString *directory = [@"cache" stringByAppendingPathComponent:@"ImageManipulator"];
+  // // [fileSystem ensureDirExistsWithPath:directory];
+  // NSString *fileName = [[[NSUUID UUID] UUIDString] stringByAppendingString:extension];
+  // NSString *newPath = [directory stringByAppendingPathComponent:fileName];
+  // [imageData writeToFile:newPath atomically:YES];
+  // NSURL *fileURL = [NSURL fileURLWithPath:newPath];
+  // NSString *filePath = [fileURL absoluteString];
+  // NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
+  // response[@"uri"] = filePath;
+  // response[@"width"] = @(CGImageGetWidth(image.CGImage));
+  // response[@"height"] = @(CGImageGetHeight(image.CGImage));
+  // if (saveOptions[@"base64"] && [saveOptions[@"base64"] boolValue]) {
+  //  response[@"base64"] = [imageData base64EncodedStringWithOptions:0];
+  // }
 
   resolve(response);
 }

@@ -187,7 +187,7 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
   NSString *filePath = [fileURL absoluteString];
   NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
   NSURL *fileUrl = [[NSURL alloc] initFileURLWithPath:newPath];
-  response[@"uri"] = fileUrl.absoluteString;
+  response[@"uri"] = filePath;
   response[@"width"] = @(CGImageGetWidth(image.CGImage));
   response[@"height"] = @(CGImageGetHeight(image.CGImage));
   if (saveOptions[@"base64"] && [saveOptions[@"base64"] boolValue]) {
@@ -196,3 +196,5 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
 
   resolve(response);
 }
+
+@end

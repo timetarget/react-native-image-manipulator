@@ -26,15 +26,6 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
 {
   NSURL *url = [NSURL URLWithString:uri];
   NSString *path = [url.path stringByStandardizingPath];
-  // id<EXFileSystemInterface> fileSystem = [self.bridge.scopedModules.moduleRegistry getModuleImplementingProtocol:@protocol(EXFileSystemInterface)];
-  // if (!fileSystem) {
-  //   reject(@"E_MISSING_MODULE", @"No FileSystem module.", nil);
-  //   return;
-  // }
-  // if (!([fileSystem permissionsForURI:url] & EXFileSystemPermissionRead)) {
-  //   reject(@"E_FILESYSTEM_PERMISSIONS", [NSString stringWithFormat:@"File '%@' isn't readable.", uri], nil);
-  //   return;
-  // }
 
   if ([[url scheme] isEqualToString:@"assets-library"]) {
     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsWithALAssetURLs:@[url] options:nil];
@@ -185,40 +176,22 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
   }
 
 
-  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
   NSString *directory = directory = [paths firstObject];
+  NSString *fileName = [[[NSUUID UUID] UUIDString] stringByAppendingString:extension];
+  NSString *newPath = [directory stringByAppendingPathComponent:fileName];
 
-  NSString* name = [[NSUUID UUID] UUIDString];
-  NSString* fullName = [NSString stringWithFormat:@"%@.%@", name, extension];
-  NSString* fullPath = [directory stringByAppendingPathComponent:fullName];
-
-  [imageData writeToFile:fullPath atomically:YES];
-  NSURL *fileURL = [NSURL fileURLWithPath:fullPath];
-  NSString *filePath = [fileURL path];
+  [imageData writeToFile:newPath atomically:YES];
+  NSURL *fileURL = [NSURL fileURLWithPath:newPath];
+  NSString *filePath = [fileURL absoluteString];
   NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-   NSURL *fileUrl = [[NSURL alloc] initFileURLWithPath:fullPath];
-   response[@"path"] = fullPath;
+  NSURL *fileUrl = [[NSURL alloc] initFileURLWithPath:newPath];
   response[@"uri"] = fileUrl.absoluteString;
   response[@"width"] = @(CGImageGetWidth(image.CGImage));
   response[@"height"] = @(CGImageGetHeight(image.CGImage));
   if (saveOptions[@"base64"] && [saveOptions[@"base64"] boolValue]) {
    response[@"base64"] = [imageData base64EncodedStringWithOptions:0];
   }
-
-  // NSString *directory = [@"cache" stringByAppendingPathComponent:@"ImageManipulator"];
-  // // [fileSystem ensureDirExistsWithPath:directory];
-  // NSString *fileName = [[[NSUUID UUID] UUIDString] stringByAppendingString:extension];
-  // NSString *newPath = [directory stringByAppendingPathComponent:fileName];
-  // [imageData writeToFile:newPath atomically:YES];
-  // NSURL *fileURL = [NSURL fileURLWithPath:newPath];
-  // NSString *filePath = [fileURL absoluteString];
-  // NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-  // response[@"uri"] = filePath;
-  // response[@"width"] = @(CGImageGetWidth(image.CGImage));
-  // response[@"height"] = @(CGImageGetHeight(image.CGImage));
-  // if (saveOptions[@"base64"] && [saveOptions[@"base64"] boolValue]) {
-  //  response[@"base64"] = [imageData base64EncodedStringWithOptions:0];
-  // }
 
   resolve(response);
 }

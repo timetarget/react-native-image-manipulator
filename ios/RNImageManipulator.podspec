@@ -2,21 +2,16 @@
 Pod::Spec.new do |s|
   s.name         = "RNImageManipulator"
   s.version      = "1.0.0"
-  s.summary      = "RNImageManipulator"
-  s.description  = <<-DESC
-                  RNImageManipulator
-                   DESC
+  s.summary      = "An API to modify images stored in app scope."
+  s.description  = "An API to modify images stored in app scope."
   s.homepage     = ""
   s.license      = "MIT"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.author             = { "author" => "author@domain.cn" }
+  s.author             = { "author" => "pontus@lostisland.co" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/author/RNImageManipulator.git", :tag => "master" }
+  s.source       = { :git => "https://github.com/pontusab/RNImageManipulator.git", :tag => "master" }
   s.source_files  = "RNImageManipulator/**/*.{h,m}"
   s.requires_arc = true
 
-
   s.dependency "React"
-  #s.dependency "others"
 
 end

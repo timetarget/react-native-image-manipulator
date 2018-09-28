@@ -1,4 +1,5 @@
 #import "RNImageManipulator.h"
+#import "ImageUtils.h"
 #import <React/RCTLog.h>
 #import <Photos/Photos.h>
 
@@ -148,7 +149,7 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
         return;
       }
       CGRect cropDimensions = CGRectMake(originX, originY, requestedWidth, requestedHeight);
-      image = @""; //[ImageUtils cropImage:image toRect:cropDimensions];
+      image = [ImageUtils cropImage:image toRect:cropDimensions];
     }
   }
 

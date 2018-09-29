@@ -176,7 +176,6 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
     extension = @".jpg";
   }
 
-
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
   NSString *directory = directory = [paths firstObject];
   NSString *fileName = [[[NSUUID UUID] UUIDString] stringByAppendingString:extension];
@@ -188,6 +187,7 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
   NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
   NSURL *fileUrl = [[NSURL alloc] initFileURLWithPath:newPath];
   response[@"uri"] = filePath;
+  response[@"filename"] = fileName;
   response[@"width"] = @(CGImageGetWidth(image.CGImage));
   response[@"height"] = @(CGImageGetHeight(image.CGImage));
   if (saveOptions[@"base64"] && [saveOptions[@"base64"] boolValue]) {

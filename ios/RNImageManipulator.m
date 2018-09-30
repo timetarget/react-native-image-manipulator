@@ -176,6 +176,7 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
     extension = @".jpg";
   }
 
+
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
   NSString *directory = directory = [paths firstObject];
   NSString *fileName = [[[NSUUID UUID] UUIDString] stringByAppendingString:extension];

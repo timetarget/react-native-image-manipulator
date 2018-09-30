@@ -186,7 +186,6 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
   NSURL *fileURL = [NSURL fileURLWithPath:newPath];
   NSString *filePath = [fileURL absoluteString];
   NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-  NSURL *fileUrl = [[NSURL alloc] initFileURLWithPath:newPath];
   response[@"uri"] = filePath;
   response[@"filename"] = fileName;
   response[@"width"] = @(CGImageGetWidth(image.CGImage));

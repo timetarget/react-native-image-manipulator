@@ -156,7 +156,7 @@ public class RNImageManipulator extends ReactContextBaseJavaModule {
     String path = null;
     String base64String = null;
     try {
-      path = "" //ExpFileUtils.generateOutputPath(mScopedContext.getCacheDir(), "ImageManipulator", extension);
+      path = ""; //ExpFileUtils.generateOutputPath(mScopedContext.getCacheDir(), "ImageManipulator", extension);
       out = new FileOutputStream(path);
       bmp.compress(compressFormat, compressionQuality, out);
 

@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.reactnativeimagemanipulator;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;

@@ -111,7 +111,7 @@ export default class ImageManipulatorSample extends React.Component {
 
 1.  Open up `android/app/src/main/java/[...]/MainActivity.java`
 
-- Add `import com.reactlibrary.RNImageManipulatorPackage;` to the imports at the top of the file
+- Add `import com.reactnativeimagemanipulator.RNImageManipulatorPackage;` to the imports at the top of the file
 - Add `new RNImageManipulatorPackage()` to the list returned by the `getPackages()` method
 
 2.  Append the following lines to `android/settings.gradle`:

@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.version      = "1.0.0"
   s.summary      = "An API to modify images stored in app scope."
   s.description  = "An API to modify images stored in app scope."
-  s.homepage     = ""
+  s.homepage     = "n/a"
   s.license      = "MIT"
   s.author             = { "author" => "pontus@lostisland.co" }
   s.platform     = :ios, "7.0"
